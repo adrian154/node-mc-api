@@ -1,0 +1,22 @@
+{
+  "name": "minecraft-api",
+  "version": "1.0.0",
+  "description": "API wrapper for Mojang's API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrian154/minecraft-api.git"
+  },
+  "author": "adrian z",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrian154/minecraft-api/issues"
+  },
+  "homepage": "https://github.com/adrian154/minecraft-api#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
+}
