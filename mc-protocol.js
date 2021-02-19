@@ -65,13 +65,13 @@ module.exports = {
         // defaults
         port = port || 25565;
     
-        // do the ping
+        // open socket
         const socket = new SocketWrapper(host, port);
         await socket.waitConnect();
 
+        // ping
         socket.write(makeHandshakePacket(host, port, HandshakeState.PING));
         socket.write(makeRequestPacket());
-
         return await readPacket(socket);
 
     }

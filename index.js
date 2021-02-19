@@ -1,4 +1,5 @@
 const fetch = require("node-fetch");
+const mcProtocol = require("./mc-protocol.js");
 
 const APIStatus = {
     NO_ISSUES: 0,
@@ -13,9 +14,8 @@ const statusMap = {
 };
 
 const APIFetch = async (endpoint, options) => {
-    let resp = await fetch(endpoint, options);
-    if(resp.status != 200)
-        throw new Error((await resp.json()).error);
+    const resp = await fetch(endpoint, options);
+    if(resp.status != 200) throw new Error((await resp.json()).error);
     return await resp.json();
 };
 
@@ -23,8 +23,7 @@ module.exports = {
     APIStatus: APIStatus,
     getAPIStatus: async () => {
 
-        let resp = await APIFetch("https://status.mojang.com/check");
-
+        const resp = await APIFetch("https://status.mojang.com/check");
         return resp.map((status) => {
             
             let service = Object.keys(status)[0];
@@ -41,7 +40,7 @@ module.exports = {
     },
     getProfile: async (playerName) => {
         
-        let resp = await APIFetch(`https://api.mojang.com/profiles/minecraft`, {
+        const resp = await APIFetch(`https://api.mojang.com/profiles/minecraft`, {
             method: "POST",
             body: JSON.stringify([playerName]),
             headers: {
@@ -49,8 +48,7 @@ module.exports = {
             }
         });
 
-        if(resp.length !== 1)
-            throw new Error("No player has that name, or the API sent an invalid response.");
+        if(resp.length !== 1) throw new Error("No player has that name, or the API sent an invalid response.");
 
         return {
             uuid: resp[0].id,
@@ -61,7 +59,7 @@ module.exports = {
     },
     getProfiles: async (playerNames) => {
 
-        let resp = await APIFetch(`https://api.mojang.com/profiles/minecraft`, {
+        const resp = await APIFetch(`https://api.mojang.com/profiles/minecraft`, {
             method: "POST",
             body: JSON.stringify(playerNames),
             headers: {
@@ -76,15 +74,12 @@ module.exports = {
         }]));
 
     },
-    getSkins: async(uuid) => {
+    getSkins: async (uuid) => {
 
-        let resp = await APIFetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`);
-        
-        let dataProp = resp.properties.find(prop => prop.name === "textures");
-        if(!dataProp)
-            throw new Error("Response from API was missing property \"textures\".");
-
-        let data = JSON.parse(Buffer.from(dataProp.value, "base64").toString("ascii"));
+        const resp = await APIFetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuid}`);
+        const dataProp = resp.properties.find(prop => prop.name === "textures");
+        if(!dataProp) throw new Error("Response from API was missing property \"textures\".");
+        const data = JSON.parse(Buffer.from(dataProp.value, "base64").toString("ascii"));
 
         // the mere presence of `metadata` indicates a slim skin
         // this could change though...
@@ -95,5 +90,6 @@ module.exports = {
             capeURL: (data.textures.CAPE || {}).url
         };
 
-    }
+    },
+    pingServer: mcProtocol.pingServer
 };

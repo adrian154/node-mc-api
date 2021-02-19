@@ -2,13 +2,39 @@
 
 Mojang API wrapper for Node.
 
-# Initialization
+# General usage
 
-None needed. This wrapper is completely stateless.
-
-# Usage
+To use the API, just require this module. 
 
 All functions are asynchronous, meaning they will immediately return promises. The "returns" value indicates the value which the promise will be resolved with.
+
+# Minecraft protocol functions
+
+## `API.pingServer(host, port)`
+
+**Parameters**:
+* `host`: `String`, the hostname of the server (domain or IP)
+* `port`: **Optional**. The server's port. Default value is 25565
+
+**Returns**: Information about the server.
+
+Example response:
+
+```
+{
+    version: {name: String, protocol: Number},
+    players: {max: Number, online: Number},
+    description: {text: String},
+    favicon: String
+}
+```
+
+**Notes**
+* `protocol` is a [protocol version number](https://wiki.vg/Protocol_version_numbers)
+* `favicon` is a image data URL.
+* Servers could potentially send *any JSON* as a response. This wrapper does not verify that the fields you are interested in will be present.
+
+# Mojang protocol functions
 
 ## `API.getAPIStatus()`
 
