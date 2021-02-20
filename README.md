@@ -2,6 +2,10 @@
 
 Mojang API wrapper for Node.
 
+# Changelog
+
+See [CHANGELOG.md](https://github.com/adrian154/minecraft-api/blob/master/CHANGELOG.md).
+
 # General usage
 
 To use the API, just require this module. 
