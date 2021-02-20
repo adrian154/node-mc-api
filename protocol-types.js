@@ -15,6 +15,8 @@ const SocketWrapper = class {
 
         this.socket.on("data", (data) => {
 
+            console.log(data);
+
             if(this.buffer)
                 this.buffer = Buffer.concat([this.buffer, data]);
             else
@@ -28,6 +30,11 @@ const SocketWrapper = class {
                 this.resolveRead(result);
             }
 
+        });
+
+        this.socket.on("error", (error) => {
+            if(this.rejectConnect) this.rejectConnect(error);
+            if(this.bytesToRead) this.rejectRead(error);
         });
 
         this.socket.connect(port, host, () => {

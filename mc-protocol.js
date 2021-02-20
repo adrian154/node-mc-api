@@ -1,3 +1,5 @@
+const dns = require("dns").promises;
+const net = require("net");
 const { BufferReader, BufferBuilder, SocketWrapper } = require("./protocol-types");
 
 const PacketID = {
@@ -65,6 +67,19 @@ module.exports = {
         // defaults
         port = port || 25565;
     
+        // resolve everything
+        if(!net.isIP(host)) {
+            try {
+                const records = await dns.resolveSrv(`_minecraft._tcp.${host}`);
+                if(records && records.length > 0) {
+                    host = records[0].name;
+                    port = records[0].port;
+                }
+            } catch(error) {
+                // keep this a secret...
+            }
+        }
+
         // open socket
         const socket = new SocketWrapper(host, port);
         await socket.waitConnect();
