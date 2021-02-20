@@ -1,5 +1,5 @@
 {
-  "name": "mc-api",
+  "name": "node-mc-api",
   "version": "1.0.1",
   "description": "API wrapper for Minecraft",
   "main": "index.js",
@@ -17,9 +17,7 @@
   },
   "homepage": "https://github.com/adrian154/minecraft-api#readme",
   "dependencies": {
-    "express": "^4.17.1",
-    "node-fetch": "^2.6.1",
-    "node-mc-api": "^1.0.0"
+    "node-fetch": "^2.6.1"
   },
   "devDependencies": {}
 }

@@ -1,4 +1,4 @@
-# minecraft-api
+# node-mc-api
 
 Mojang API wrapper for Node.
 
