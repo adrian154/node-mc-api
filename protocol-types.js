@@ -3,10 +3,15 @@ const net = require("net");
 // tiny wrapper to buffer things
 const SocketWrapper = class {
 
-    constructor(host, port) {
+    constructor(host, port, timeout) {
         
         this.socket = new net.Socket();
+        this.socket.setTimeout(timeout);
         this.buffer = null;
+
+        this.socket.on("timeout", () => {
+            this.socket.destroy();
+        });
 
         this.socket.on("close", () => {
             if(this.rejectConnect) this.rejectConnect("Socket closed");

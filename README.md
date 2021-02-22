@@ -18,7 +18,9 @@ All functions are asynchronous, meaning they will immediately return promises. T
 
 **Parameters**:
 * `host`: `String`, the hostname of the server (domain or IP)
-* `port`: **Optional**. The server's port. Default value is 25565
+* `options`: **Optional**: Object with these fields:
+    * `port`: Port the server is to be pinged on. By default, 25565.
+    * `timeout`: Milliseconds of inactivity before the connection is automatically terminated. By default, 5000 ms.
 
 **Returns**: Information about the server.
 

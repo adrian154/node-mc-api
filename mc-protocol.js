@@ -62,11 +62,12 @@ const readPacket = async (socket) => {
 };
 
 module.exports = {
-    pingServer: async (host, port) => {
+    pingServer: async (host, options) => {
 
         // defaults
-        port = port || 25565;
-    
+        const port = options?.port ?? 25565;
+        const timeout = options?.timeout ?? 5000;
+
         // resolve everything
         if(!net.isIP(host)) {
             try {
@@ -81,7 +82,7 @@ module.exports = {
         }
 
         // open socket
-        const socket = new SocketWrapper(host, port);
+        const socket = new SocketWrapper(host, port, timeout);
         await socket.waitConnect();
 
         // ping
