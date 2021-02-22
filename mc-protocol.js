@@ -65,19 +65,19 @@ module.exports = {
     pingServer: async (host, options) => {
 
         // defaults
-        const port = options?.port ?? 25565;
+        let port = options?.port ?? 25565;
         const timeout = options?.timeout ?? 5000;
 
         // resolve everything
         if(!net.isIP(host)) {
             try {
                 const records = await dns.resolveSrv(`_minecraft._tcp.${host}`);
-                if(records && records.length > 0) {
+                if(records.length > 0) {
                     host = records[0].name;
                     port = records[0].port;
                 }
             } catch(error) {
-                // keep this a secret...
+                // no SRV record? no problem!
             }
         }
 

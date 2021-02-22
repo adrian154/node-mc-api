@@ -14,12 +14,18 @@ const SocketWrapper = class {
         });
 
         this.socket.on("close", () => {
+
+        
             if(this.rejectConnect) this.rejectConnect("Socket closed");
-            if(this.bytesToRead && this.buffer)
-                if(this.bytesToRead <= this.buffer.length)
+         
+            if(this.bytesToRead) {
+                if(this.buffer && this.bytesToRead <= this.buffer.length) {
                     return this.buffer.slice(0, this.bytesToRead);
-                else
+                } else {
                     this.rejectRead("Socket closed before enough data could be received");
+                }
+            }
+
         });
 
         this.socket.on("data", (data) => {
