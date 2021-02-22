@@ -1,3 +1,7 @@
+# 1.1.2
+
+* Fixed issue in socket handling that caused unhandled errors when the socket prematurely closed.
+
 # 1.1.1
 
 * Fixed issue in socket handling that would raise an error despite receiving a valid response.
