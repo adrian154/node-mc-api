@@ -1,3 +1,8 @@
+# 1.1.0
+
+* Added support for a custom socket timeout.
+    * Changed usage for `.pingServer()`
+
 # 1.0.2
 
 * Remove accidentally left-in `console.log` statement
