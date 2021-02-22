@@ -22,10 +22,8 @@ const servers = [
     "mc.snapcraft.net",
     "brawl.com",
     "play.gotpvp.com",
-    "play.thesquadmc.net",
     "mc.momentonetwork.net",
     "play.skykingdoms.net",
-    "play.pika-network.eu",
     "play.extremecraft.net"
 ];
 

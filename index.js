@@ -91,5 +91,6 @@ module.exports = {
         };
 
     },
-    pingServer: mcProtocol.pingServer
+    pingServer: mcProtocol.pingServer,
+    legacyPing: mcProtocol.legacyPing
 };

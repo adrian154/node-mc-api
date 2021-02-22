@@ -1,3 +1,7 @@
+# 1.1.3
+
+* Added support for Minecraft's older ping protocol
+
 # 1.1.2
 
 * Fixed issue in socket handling that caused unhandled errors when the socket prematurely closed.

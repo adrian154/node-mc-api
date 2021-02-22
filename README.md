@@ -40,6 +40,27 @@ Example response:
 * `favicon` is a image data URL.
 * Servers could potentially send *any JSON* as a response. This wrapper does not verify that the fields you are interested in will be present.
 
+## `API.legacyPing(host, options)`
+
+**Parameters**
+* Identical to `API.pingServer()`
+
+**Returns**: Information about the server.
+
+Example response:
+
+```
+{
+    version: {name: String, protocol: Number},
+    description: {text: String},
+    players: {online: Number, max: Number}
+}
+```
+
+**Notes**:
+* This protocol was used in Minecraft 1.6 and all other versions prior to the Netty rewrite. It is not supported on many modern servers, use at your own risk.
+* The data returned through this method is limited (no favicon, other things may be missing)
+
 # Mojang protocol functions
 
 ## `API.getAPIStatus()`

@@ -126,6 +126,7 @@ const BufferReader = class {
     readBytes(count) { return this.buffer.slice(this.move(count), this.offset); }
     readByte()       { return this.buffer.readUInt8(this.move(1)); }
     readUInt16()     { return this.buffer.readUInt16LE(this.move(2)); }
+    readUInt16BE()   { return this.buffer.readUInt16BE(this.move(2)); }
     readInt32()      { return this.buffer.readInt32LE(this.move(4)); }
     readUInt32()     { return this.buffer.readUInt32LE(this.move(4)); }
     readUInt64()     { return this.buffer.readBigInt64LE(this.move(8)); }
@@ -164,9 +165,11 @@ const BufferBuilder = class {
     }
 
     // put methods
-    putBuffer(buffer, start) { if(start) this.buffers.unshift(buffer); else this.buffers.push(buffer); }
-    putByte(value, start)    { const buf = Buffer.alloc(1); buf.writeUInt8(value); this.putBuffer(buf, start); }
-    putUShort(value, start)  { const buf = Buffer.alloc(2); buf.writeUInt16LE(value); this.putBuffer(buf, start); }
+    putBuffer(buffer, start)  { if(start) this.buffers.unshift(buffer); else this.buffers.push(buffer); }
+    putByte(value, start)     { const buf = Buffer.alloc(1); buf.writeUInt8(value); this.putBuffer(buf, start); }
+    putUShort(value, start)   { const buf = Buffer.alloc(2); buf.writeUInt16LE(value); this.putBuffer(buf, start); }
+    putUShortBE(value, start) { const buf = Buffer.alloc(2); buf.writeUInt16BE(value); this.putBuffer(buf, start); }
+    putUIntBE(value, start)   { const buf = Buffer.alloc(4); buf.writeUInt32BE(value); this.putBuffer(buf, start); }
 
     putVarInt(value, start) {
 
