@@ -1,3 +1,8 @@
+# 1.1.1
+
+* Fixed issue in socket handling that would raise an error despite receiving a valid response.
+* Fixed an incorrect documentation header.
+
 # 1.1.0
 
 * Added support for a custom socket timeout.

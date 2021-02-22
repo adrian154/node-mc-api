@@ -14,7 +14,7 @@ All functions are asynchronous, meaning they will immediately return promises. T
 
 # Minecraft protocol functions
 
-## `API.pingServer(host, port)`
+## `API.pingServer(host, options)`
 
 **Parameters**:
 * `host`: `String`, the hostname of the server (domain or IP)

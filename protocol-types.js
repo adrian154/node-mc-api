@@ -15,7 +15,11 @@ const SocketWrapper = class {
 
         this.socket.on("close", () => {
             if(this.rejectConnect) this.rejectConnect("Socket closed");
-            if(this.bytesToRead) this.rejectRead("Socket closed before enough data could be received.");
+            if(this.bytesToRead)
+                if(this.bytesToRead <= this.buffer.length)
+                    return this.buffer.slice(0, this.bytesToRead);
+                else
+                    this.rejectRead("Socket closed before enough data could be received");
         });
 
         this.socket.on("data", (data) => {
@@ -24,7 +28,7 @@ const SocketWrapper = class {
                 this.buffer = Buffer.concat([this.buffer, data]);
             else
                 this.buffer = data;
-            
+
             if(this.bytesToRead && this.buffer.length >= this.bytesToRead) {
                 const result = this.buffer.slice(0, this.bytesToRead);
                 const remaining = this.buffer.slice(this.bytesToRead, this.buffer.length);
@@ -65,7 +69,7 @@ const SocketWrapper = class {
     async read(count) {
 
         if(this.bytesToRead) throw new Error("read() already called. Please `await` for that first request to finish.");
-        if(this.buffer && this.buffer.length > count) {
+        if(this.buffer && this.buffer.length >= count) {
             const data = this.buffer.slice(0, count);
             this.buffer = this.buffer.slice(count, this.buffer.length);
             return data;
