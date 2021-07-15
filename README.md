@@ -61,7 +61,7 @@ Example response:
 * This protocol was used in Minecraft 1.6 and all other versions prior to the Netty rewrite. It is not supported on many modern servers, use at your own risk.
 * The data returned through this method is limited (no favicon, other things may be missing)
 
-# Mojang protocol functions
+# Mojang API
 
 ## `API.getAPIStatus()`
 
@@ -170,3 +170,81 @@ Example response:
 ```
 
 `capeURL` may be undefined if the player does not have a cape. `slim` indicates whether the player's skin is "slim" (3-pixel arms) or wide (4-pixel arms).
+
+# `MojangClient`
+
+APIs that require authentication are accessed through instances of `MojangClient`.
+
+When an API call fails an error is thrown.
+
+# Constructor
+
+`MojangClient()` - Nothing to say here
+
+# Properties
+
+`MojangClient.clientToken`: The client token  returned by Yggdrasil
+
+`MojangClient.accessToken`: The JWT access token returned by Yggdrasil
+
+`MojangClient.tokenInfo`: The actual contents of the returned access token
+* `iat`: The timestamp at which the token was issued
+* `exp`: The timestamp at which the token expires
+
+`MojangClient.profile`: 
+* `id`: The player's UUID
+* `name`: The player's username
+
+# Methods
+
+## `MojangClient.login(username, password)`
+
+**Parameters:**
+* `username`: String - the account email or username for unmigrated accounts.
+* `password`: String - the password.
+
+Obtains an access token from the Mojang servers. A call to this method must have succeeded at least once to access any of the other APIs included under `MojangClient`.
+
+Returns a `Promise` that resolves to undefined when an access token is obtained.
+
+## `MojangClient.signout()`
+
+**Parameters:** None
+
+Invalidates the current access token.
+
+Returns a `Promise` that resolves to undefined when the access token is invalidated.
+
+## `MojangClient.resetSkin()` 
+
+**Parameters:** None
+
+Resets the player's skin to the default one.
+
+Returns a `Promise` that resolves to undefined when the skin is reset.
+
+## `MojangClient.uploadSkin(imageData, slim)`
+
+**Parameters:** 
+* `imageData`: Buffer - the skin data (should be a PNG)
+* `slim`: Boolean - `true` if the skin has 3-pixel wide arms, `false` if the skin has 4-pixel wide arms
+
+Uploads and changes the player's skin.
+
+Returns a `Promise` that resolves to undefined when the skin is uploaded.
+
+## `MojangClient.checkNameAvailable(name)`
+
+**Parameters:**
+* `name`: String - the name to check
+
+Returns a `Promise` that resolves to `true` if the name is available and `false` if not. This method will also indicate if a name is blocked by Mojang, e.g. if the name includes profanity.
+
+## `MojangClient.changeName(name)`
+
+**Parameters:**
+* `name`: String - the new name
+
+Changes the player's name.
+
+Returns a `Promise` that resolves to undefined when the player's name is changed.

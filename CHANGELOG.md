@@ -1,6 +1,16 @@
-# 1.1.3
+# 1.1.5
+
+* Added a wrapper for Mojang's Yggdrasil authentication system.
+* Added support for skin upload/reset
+* Added support for name changing
+
+# 1.1.4
 
 * Added support for Minecraft's older ping protocol
+
+# 1.1.3
+
+* Added missing file
 
 # 1.1.2
 
