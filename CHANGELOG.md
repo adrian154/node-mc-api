@@ -1,4 +1,4 @@
-# 1.1.5
+# 1.2.0
 
 * Added a wrapper for Mojang's Yggdrasil authentication system.
 * Added support for skin upload/reset
