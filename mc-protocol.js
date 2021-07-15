@@ -72,7 +72,7 @@ const parseParams = async (host, options) => {
                 port = records[0].port;
             }
         } catch(error) {
-            // no SRV record? no problem!
+            // no SRV record, no problem
         }  
     }
 
@@ -182,7 +182,7 @@ module.exports = {
         // ping
         socket.write(makeHandshakePacket(host, port, HandshakeState.PING));
         socket.write(makeRequestPacket());
-        return await readPacket(socket);
+        return readPacket(socket);
 
     },
     legacyPing: async (inHost, options) => {
@@ -196,7 +196,7 @@ module.exports = {
 
         // send ping packet
         socket.write(makeLegacyHandshake(host, port));
-        return await readLegacyResponse(socket);
+        return readLegacyResponse(socket);
 
     }
 };

@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/adrian154/minecraft-api#readme",
   "dependencies": {
+    "form-data": "^4.0.0",
     "node-fetch": "^2.6.1"
   },
   "devDependencies": {}
