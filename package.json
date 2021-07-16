@@ -10,6 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/adrian154/minecraft-api.git"
   },
+  "keywords": [
+    "minecraft",
+    "mojang",
+    "api",
+    "yggdrasil",
+    "ping",
+    "authentication"
+  ],
   "author": "adrian z",
   "license": "MIT",
   "bugs": {

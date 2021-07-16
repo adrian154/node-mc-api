@@ -106,8 +106,8 @@ class MojangClient {
         this.clientToken = resp.clientToken;
         this.accessToken = resp.accessToken;
         this.tokenInfo = JSON.parse(Buffer.from(this.accessToken.split(".")[1], "base64").toString("utf-8"));
-
-        this.profile = await this.makeAuthedRequest("https://api.minecraftservices.com/minecraft/profile");
+        this.profile = resp.selectedProfile;
+        
     }
 
     // invalidate access token

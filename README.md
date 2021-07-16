@@ -179,7 +179,7 @@ When an API call fails an error is thrown.
 
 # Constructor
 
-`MojangClient()` - Nothing to say here
+`MojangClient()` - nothing to say here
 
 # Properties
 
@@ -194,6 +194,8 @@ When an API call fails an error is thrown.
 `MojangClient.profile`: 
 * `id`: The player's UUID
 * `name`: The player's username
+
+Demo accounts will not have a `.profile` property. It is the caller's responsibility to verify that the user is not a demo account before calling API methods that require a full account. Anything that involves usernames or skins (anything that is associated with UUIDs) cannot be done with a demo account.
 
 # Methods
 

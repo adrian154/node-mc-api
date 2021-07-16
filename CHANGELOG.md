@@ -1,3 +1,7 @@
+# 1.2.1
+
+* Improve handling of demo accounts
+
 # 1.2.0
 
 * Added a wrapper for Mojang's Yggdrasil authentication system.
