@@ -16,13 +16,13 @@ const SocketWrapper = class {
         this.socket.on("close", () => {
 
         
-            if(this.rejectConnect) this.rejectConnect("Socket closed");
+            if(this.rejectConnect) this.rejectConnect(new Error("Socket closed"));
          
             if(this.bytesToRead) {
                 if(this.buffer && this.bytesToRead <= this.buffer.length) {
                     return this.buffer.slice(0, this.bytesToRead);
                 } else {
-                    this.rejectRead("Socket closed before enough data could be received");
+                    this.rejectRead(new Error("Socket closed before enough data could be received"));
                 }
             }
 
