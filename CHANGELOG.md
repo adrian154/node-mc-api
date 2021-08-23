@@ -1,3 +1,7 @@
+# 1.2.2
+
+* Make error handling consistent (always throw an Error object)
+
 # 1.2.1
 
 * Improve handling of demo accounts
